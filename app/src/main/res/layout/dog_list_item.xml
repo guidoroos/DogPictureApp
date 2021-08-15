@@ -22,17 +22,6 @@
         android:onLongClickListener="@{() -> longClickListener.onClick(dog)}"
         >
 
-        <TextView
-            android:id="@+id/date_string"
-            android:layout_width="0dp"
-            android:layout_height="20dp"
-            android:layout_marginTop="8dp"
-            android:text="@{dog.date}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/breed_string"
-            app:layout_constraintTop_toBottomOf="@+id/breed_string"
-            tools:text="01/01/2021" />
-
         <ImageView
             android:id="@+id/dog_icon"
             android:layout_width="60dp"
@@ -48,7 +37,20 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/date_string"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="8dp"
+            android:text="@{dog.date}"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/breed_string"
+            app:layout_constraintTop_toBottomOf="@+id/breed_string"
+            tools:text="01/01/2021" />
+
+        <TextView
             android:id="@+id/breed_string"
+            android:textSize="18sp"
             android:layout_width="0dp"
             android:layout_height="20dp"
             android:layout_marginStart="50dp"
