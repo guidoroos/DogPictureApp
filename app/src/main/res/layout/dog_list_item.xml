@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="dog"
+            type="com.example.dogsapplication.database.Dog" />
+        <variable
+            name="clickListener"
+            type="com.example.dogsapplication.doghistory.DogListener"/>
+        <variable
+            name="longClickListener"
+            type="com.example.dogsapplication.doghistory.DogLongClickListener"/>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onLongClickListener="@{() -> longClickListener.onClick(dog)}"
+        >
+
+        <TextView
+            android:id="@+id/date_string"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="8dp"
+            android:text="@{dog.date}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/breed_string"
+            app:layout_constraintTop_toBottomOf="@+id/breed_string"
+            tools:text="01/01/2021" />
+
+        <ImageView
+            android:id="@+id/dog_icon"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:contentDescription="@string/dog_icon"
+            android:onClick="@{() -> clickListener.onClick(dog)}"
+            app:imageUrl="@{dog.url}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/breed_string"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="8dp"
+            android:text="@{dog.breed}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/dog_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Labrador" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#c0c0c0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

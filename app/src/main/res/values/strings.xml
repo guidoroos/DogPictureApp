@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">DogsApplication</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="todays_picture">Today\'s Picture</string>
+    <string name="picture_history">Picture History</string>
+    <string name="dog_picture_of_today">Dog picture</string>
+    <string name="get_new_picture">Get new picture</string>
+    <string name="show_history">Show history</string>
+    <string name="dog_picture">dog picture</string>
+    <string name="dog_icon">dog icon</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+    <string name="delete_picture_message">Delete this picture?</string>
+</resources>
