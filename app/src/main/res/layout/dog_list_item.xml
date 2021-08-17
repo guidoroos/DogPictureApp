@@ -42,7 +42,7 @@
             android:layout_height="20dp"
             android:layout_marginTop="8dp"
             android:text="@{dog.date}"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/breed_string"
             app:layout_constraintTop_toBottomOf="@+id/breed_string"
@@ -50,7 +50,7 @@
 
         <TextView
             android:id="@+id/breed_string"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:layout_width="0dp"
             android:layout_height="20dp"
             android:layout_marginStart="50dp"

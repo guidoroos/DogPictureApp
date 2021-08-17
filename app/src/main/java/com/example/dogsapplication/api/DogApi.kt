@@ -16,7 +16,7 @@ val apiModule = module {
     fun provideMoshi(): Moshi = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())
         .build()
-    
+
     fun provideRetrofit(moshi: Moshi): Retrofit = Retrofit.Builder()
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .baseUrl("https://dog.ceo/api/")

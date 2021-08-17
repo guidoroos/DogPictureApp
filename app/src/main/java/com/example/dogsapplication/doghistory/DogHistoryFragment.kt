@@ -7,15 +7,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.NotificationManagerCompat
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.example.dogsapplication.R
 import com.example.dogsapplication.database.Dog
 import com.example.dogsapplication.databinding.FragmentDogHistoryBinding
-import com.example.dogsapplication.notifications.createChannel
-import com.example.dogsapplication.notifications.sendNotification
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
