@@ -9,8 +9,21 @@ import androidx.work.WorkerParameters
 import com.example.dogsapplication.R
 
 
+/**
+ * Notification worker used for defining a task of creating a notification, that can be run on schedule
+ *
+ * @constructor
+ *
+ * @param ctx
+ * @param params
+ */
 class NotificationWorker(ctx: Context, params: WorkerParameters) : Worker(ctx, params) {
 
+    /**
+     * task of creating a notification
+     *
+     * @return
+     */
     override fun doWork(): Result {
         val appContext = applicationContext
 

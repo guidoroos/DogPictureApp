@@ -11,13 +11,23 @@ import androidx.core.app.NotificationCompat
 import com.example.dogsapplication.MainActivity
 import com.example.dogsapplication.R
 
-// Notification ID.
+
+
 private val CHANNEL_ID = "100"
+
+
 private val CHANNEL_NAME = "dog_notifications"
+
+
 private val NOTIFICATION_ID = 0
 
-fun createChannel( context: Context) {
-    //setup channel settings
+/**
+ * Create channel that users can use to modify notification behaviour in settings
+ *
+ * @param context
+ */
+fun createChannel(context: Context) {
+    //setup channel settings: only needed when api > 25
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         val notificationChannel =
             NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_LOW)
@@ -27,7 +37,7 @@ fun createChannel( context: Context) {
             enableVibration(true)
             description = "Dog Picture Notifications"
         }
-        //create channel
+        //create the notification channel
         val notificationManager = context.getSystemService(
             NotificationManager::class.java
         )
@@ -37,10 +47,20 @@ fun createChannel( context: Context) {
 }
 
 
+/**
+ * set up the notification and send it
+ *
+ * @param messageBody
+ * @param applicationContext
+ */
 fun NotificationManager.sendNotification(messageBody: String, applicationContext: Context) {
 
     val contentIntent = Intent(applicationContext, MainActivity::class.java)
 
+
+    /**
+     * Content pending intent that can be executed on notification click
+     */
     val contentPendingIntent = PendingIntent.getActivity(
         applicationContext,
         NOTIFICATION_ID,
@@ -48,12 +68,14 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
         PendingIntent.FLAG_IMMUTABLE
     )
 
-    // Build the notification
+
+    /**
+     * set text, icon and pending intent for notification and build
+     */
     val builder = NotificationCompat.Builder(
         applicationContext,
         CHANNEL_ID
     )
-        //minimum data need to be set for notification
         .setSmallIcon(R.drawable.dog)
         .setContentTitle(applicationContext
             .getString(R.string.notification_title))

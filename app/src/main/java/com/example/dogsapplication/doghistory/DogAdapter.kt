@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dogsapplication.database.Dog
 import com.example.dogsapplication.databinding.DogListItemBinding
 
-//adapter class: for listadapter using diffutil to update data
-class DogAdapter (val clickListener: DogListener, val longClickListener:DogLongClickListener) : ListAdapter<Dog, DogAdapter.ViewHolder>(DogDiffCallback()) {
+
+class DogAdapter (private val clickListener: DogListener, private val longClickListener:DogLongClickListener) : ListAdapter<Dog, DogAdapter.ViewHolder>(DogDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
@@ -22,9 +22,15 @@ class DogAdapter (val clickListener: DogListener, val longClickListener:DogLongC
     }
 
 
-    //viewholder class: inner class of adapter class, static companion for layout inflation
     class ViewHolder private constructor(val binding: DogListItemBinding): RecyclerView.ViewHolder(binding.root) {
 
+        /**
+         * icon is being set via binding adapter
+         *
+         * @param item
+         * @param clickListener
+         * @param longClickListener
+         */
         fun bind(item:Dog, clickListener: DogListener, longClickListener: DogLongClickListener) {
             binding.dog = item
             binding.clickListener = clickListener
@@ -41,7 +47,6 @@ class DogAdapter (val clickListener: DogListener, val longClickListener:DogLongC
         }
     }
 
-    //diffutil implementation
     class DogDiffCallback :
         DiffUtil.ItemCallback<Dog>() {
         override fun areItemsTheSame(oldItem: Dog, newItem: Dog): Boolean {
@@ -54,10 +59,22 @@ class DogAdapter (val clickListener: DogListener, val longClickListener:DogLongC
     }
 }
 
+/**
+ * Dog listener used for navigation to dog picture fragment to see larger picture on icon click
+ *
+ * @property clickListener
+ * @constructor Create empty Dog listener
+ */
 class DogListener(val clickListener: (dog: Dog) -> Unit) {
     fun onClick(dog: Dog) = clickListener(dog)
 }
 
+/**
+ * Dog long click listener to be used for deleting dog picture on longclick
+ *
+ * @property clickListener
+ * @constructor Create empty Dog long click listener
+ */
 class DogLongClickListener(val clickListener: (dog: Dog) -> Boolean) {
     fun onClick(dog: Dog):Boolean {
         clickListener(dog)

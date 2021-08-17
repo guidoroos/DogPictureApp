@@ -23,6 +23,6 @@ interface DogDao {
     @Query("DELETE FROM dog_table")
     suspend fun clear()
 
-    @Query("SELECT * FROM dog_table ORDER BY date DESC")
+    @Query("SELECT * FROM dog_table ORDER BY dogId DESC")
     fun getAllDogs(): LiveData<List<Dog>>
 }

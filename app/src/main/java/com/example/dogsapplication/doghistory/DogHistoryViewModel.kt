@@ -12,9 +12,15 @@ class DogHistoryViewModel(private val repository: DogRepository): ViewModel() {
         refreshDogs()
     }
 
+    /**
+     * Dog list used for recyclerview items data
+     */
     lateinit var dogList:LiveData<List<Dog>>
 
-
+    /**
+     * make sure that when a new dog is created, it is added to the recyclerview layout
+     *
+     */
     private fun refreshDogs () {
         viewModelScope.launch {
             dogList = repository.getAllDogs()

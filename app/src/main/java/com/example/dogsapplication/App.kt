@@ -20,7 +20,7 @@ const val WORK_NAME = "daily_notification"
 class App: Application() {
     override fun onCreate() {
         super.onCreate()
-        // Start Koin
+        // Start Koin for dependency injection
         startKoin{
             androidLogger()
             androidContext(this@App)
@@ -32,20 +32,20 @@ class App: Application() {
 
     private fun setupRecurringWork() {
 
-        //set constraint for wifi only and not low battery
+        //set constraint for wifi only and when not on low battery
         val constraints = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.UNMETERED)
             .setRequiresBatteryNotLow(true)
             .build()
 
 
-        //set schedule and workertask using worker class name
+        //create a repeating request with set constraints and daily interval
         val repeatingRequest = PeriodicWorkRequestBuilder<NotificationWorker>(1, TimeUnit.DAYS)
             .setConstraints(constraints)
             .build()
 
 
-        //keep existing work (otherwise replace), specify unique name
+        //enqueue work request with unique name, set retention policy
         WorkManager.getInstance(applicationContext).enqueueUniquePeriodicWork(
             WORK_NAME,
             ExistingPeriodicWorkPolicy.KEEP,
@@ -53,10 +53,12 @@ class App: Application() {
     }
 }
 
+/**
+ * App module for dependency injection in whole app scope
+ */
 val appModule = module {
 
     single { DogRepository(api = get(), database = get()) }
-
     viewModel{ DogViewModel(get()) }
     viewModel{ DogHistoryViewModel(get()) }
 

@@ -1,22 +1,22 @@
 package com.example.dogsapplication.api
 
-import com.example.dogsapplication.database.DogDatabase
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 
 
+/**
+ * Api module used in glide to generate a singleton dependency for the api service
+ */
 val apiModule = module {
     //moshi for json serialization/deserialization
     fun provideMoshi(): Moshi = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())
         .build()
-
-    //retrofit builder
+    
     fun provideRetrofit(moshi: Moshi): Retrofit = Retrofit.Builder()
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .baseUrl("https://dog.ceo/api/")
@@ -31,18 +31,12 @@ val apiModule = module {
 }
 
 
-//interface used for request: here get request using filter
+
 interface DogApiService {
     /**
-     * Returns a Coroutine [List] of [MarsProperty] which can be fetched with await() if in a Coroutine scope.
-     * The @GET annotation indicates that the "realestate" endpoint will be requested with the GET
-     * HTTP method
+     * Returns a random dog object from the dog.ceo api
      */
-    /**
-     * Returns a Coroutine [List] of [MarsProperty] which can be fetched with await() if in a Coroutine scope.
-     * The @GET annotation indicates that the "realestate" endpoint will be requested with the GET
-     * HTTP method
-     */
+
     @GET("breeds/image/random")
     suspend fun getRandomDog(): DogResponse
 }

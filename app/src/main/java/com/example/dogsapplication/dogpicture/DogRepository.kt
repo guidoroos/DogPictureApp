@@ -12,6 +12,13 @@ import kotlinx.coroutines.withContext
 import java.time.LocalDate.now
 import java.util.*
 
+/**
+ * Dog repository
+ *
+ * @property database
+ * @property api
+ * @constructor Create empty Dog repository
+ */
 class DogRepository(private val database:DogDatabase, private val api:DogApiService) {
     suspend fun getNewDogAndSaveToDb() {
 
@@ -32,18 +39,26 @@ class DogRepository(private val database:DogDatabase, private val api:DogApiServ
         return database.dogDao.getAllDogs()
     }
 
+
+    /**
+     * Get latest dog added to database
+     *
+     * @return
+     */
     suspend fun getLatestDog ():Dog {
         return database.dogDao.getLatestDog()
-    }
-
-    suspend fun clearAllDogs(){
-        database.dogDao.clear()
     }
 
     suspend fun deleteDog (dog:Dog) {
         database.dogDao.delete(dog)
     }
 
+    /**
+     * Create new dog from dog response, so that it can be saved to the database table
+     *
+     * @param dogResponse
+     * @return
+     */
     @SuppressLint("SimpleDateFormat")
     private fun createNewDogFromResponse(dogResponse: DogResponse): Dog {
         val message = dogResponse.message
@@ -53,15 +68,11 @@ class DogRepository(private val database:DogDatabase, private val api:DogApiServ
         val dateFormat = SimpleDateFormat("dd/MM/yyyy");
         val date = dateFormat.format(calendar.time);
 
-
         return Dog(
             0,
             breed,
             message,
             date
         )
-
-
     }
-
 }

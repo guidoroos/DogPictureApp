@@ -33,16 +33,16 @@ class DogHistoryFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
 
-        val adapter = DogAdapter(DogListener { dog->
-
+        /**
+         * create adapter for recyclerview and set behavior for clicklistener and longclicklistener for all items
+         */
+        val adapter = DogAdapter(DogListener { dog ->
             val dogId = dog.dogId
-
             val action = DogHistoryFragmentDirections.actionDogHistoryFragmentToDogPictureFragment()
                 .setDogId(dogId)
-
             requireView().findNavController().navigate(action)
+
         }, DogLongClickListener { dog ->
             showDeleteAlertDialog(dog)
             true
@@ -53,20 +53,19 @@ class DogHistoryFragment : Fragment() {
         binding.dogHistoryViewModel = viewModel
         binding.recyclerView.adapter = adapter
 
-        createChannel(requireContext())
-
-
-
-
         viewModel.dogList.observe(viewLifecycleOwner, {
             it?.let {
                 adapter.submitList(it)
             }
         })
-
         return binding.root
     }
 
+    /**
+     * Show delete alert dialog to confirm deleting picture
+     *
+     * @param dog
+     */
     private fun showDeleteAlertDialog(dog: Dog) {
         val myAlertBuilder = AlertDialog.Builder(this.requireContext())
 
@@ -79,10 +78,8 @@ class DogHistoryFragment : Fragment() {
             }
             setNegativeButton(getString(R.string.cancel)
             ) { _, _ ->
-
             }
         }
-
         myAlertBuilder.show()
     }
 

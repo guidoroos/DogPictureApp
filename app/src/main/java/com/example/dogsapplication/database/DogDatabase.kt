@@ -15,6 +15,10 @@ abstract class DogDatabase : RoomDatabase() {
 
 }
 
+
+/**
+ * Database module for koin that generates a singleton database and dao dependency for whole app
+ */
 val databaseModule = module {
 
     fun provideDatabase (application: Application) =
